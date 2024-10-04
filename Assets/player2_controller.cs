@@ -19,9 +19,14 @@ public class player2_controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = movementVector;
+        rb.velocity = new Vector2(speed * movementVector.x, rb.velocity.y);
 
-        // rb.velocity = new Vector2(speed * movementVector.x, rb.velocity.y);
+        if (Input.GetKeyDown(KeyCode.UpArrow)){
+            rb.AddForce(new Vector2(0, 200));
+            Debug.Log("Jumped");
+        }
+
+
     }
 
     void OnMove(InputValue value){
@@ -32,7 +37,7 @@ public class player2_controller : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision){
-        rb.AddForce(new Vector2(0, 0));
+        // rb.AddForce(new Vector2(0, 50));
 
         if(collision.gameObject.CompareTag("Ground")){
             Debug.Log("IsGround");
